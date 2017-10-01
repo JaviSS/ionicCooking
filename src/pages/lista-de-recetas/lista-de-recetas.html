@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onNuevaReceta()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Recetas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item *ngFor="let receta of recetas;let indice = index" (click)="onCargarReceta(indice)">
+      <ion-row>
+        <h2> {{receta.nombre}}</h2>
+      </ion-row>
+      <ion-row>
+        <p>{{receta.dificultad}}
+          <ion-note> ({{receta.ingredientes.length}} ingredientes)</ion-note>
+        </p>
+      </ion-row>
+    </button>
+  </ion-list>
+</ion-content>

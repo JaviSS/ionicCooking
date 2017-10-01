@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{modo}} receta</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]='formularioReceta'>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Título</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Descripción</ion-label>
+        <ion-textarea formControlName="descripcion"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Dificultad</ion-label>
+        <ion-select formControlName="dificultad">
+          <ion-option *ngFor="let dificultad of dificultades" [value]="dificultad">{{dificultad}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <button type="button" clear ion-button block (click)="onIngredientes()">Ingredientes</button>
+      <ion-list formArrayName="ingredientes">
+        <ion-item *ngFor="let ingredienteControl of formularioReceta.get('ingredientes').controls;let i = index">
+          <ion-label>Nombre</ion-label>
+          <ion-input type="text" [formControlName]="i"></ion-input>
+        </ion-item>
+      </ion-list>
+      <button type="submit" ion-button block outline (click)="onGuardar()" [disabled]="!formularioReceta.valid">
+        Guardar
+      </button>
+    </ion-list>
+  </form>
+
+</ion-content>
