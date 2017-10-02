@@ -12,6 +12,9 @@ import {PestaniasPage} from "../pages/pestanias/pestanias";
 import {RecetaPage} from "../pages/receta/receta";
 import {IngredienteServicio} from "../servicios/Ingrediente";
 import {RecetaServicio} from "../servicios/Receta";
+import {RegistroPage} from "../pages/registro/registro";
+import {InicioSesionPage} from "../pages/inicio-sesion/inicio-sesion";
+import {AutenticacionServicio} from "../servicios/Autenticacion";
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import {RecetaServicio} from "../servicios/Receta";
     ListaDeLaCompraPage,
     ListaDeRecetasPage,
     PestaniasPage,
-    RecetaPage
+    RecetaPage,
+    RegistroPage,
+    InicioSesionPage
   ],
   imports: [
     BrowserModule,
@@ -33,13 +38,16 @@ import {RecetaServicio} from "../servicios/Receta";
     ListaDeLaCompraPage,
     ListaDeRecetasPage,
     PestaniasPage,
-    RecetaPage
+    RecetaPage,
+    RegistroPage,
+    InicioSesionPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     IngredienteServicio,
     RecetaServicio,
+    AutenticacionServicio,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

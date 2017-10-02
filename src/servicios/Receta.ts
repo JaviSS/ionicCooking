@@ -1,4 +1,4 @@
-import {Receta} from "../modelos/Receta";
+  import {Receta} from "../modelos/Receta";
 
 export class RecetaServicio {
 

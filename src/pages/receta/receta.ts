@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Receta} from "../../modelos/Receta";
 import {RecetaServicio} from "../../servicios/Receta";
 import {EditarRecetaPage} from "../editar-receta/editar-receta";
+import {IngredienteServicio} from "../../servicios/Ingrediente";
 
 /**
  * Generated class for the RecetaPage page.
@@ -21,7 +22,8 @@ export class RecetaPage implements OnInit {
   indiceReceta: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private recetaServicio: RecetaServicio) {
+              private recetaServicio: RecetaServicio, private ingredientesServicio: IngredienteServicio,
+              private toastCtrl:ToastController) {
   }
 
   ngOnInit() {
@@ -31,6 +33,8 @@ export class RecetaPage implements OnInit {
 
   onInsertarEnLaListaDeLaCompra() {
 
+    this.ingredientesServicio.insertarIngredientes(this.receta.ingredientes);
+
   }
 
   onEditarReceta() {
@@ -38,6 +42,13 @@ export class RecetaPage implements OnInit {
   }
 
   onEliminarReceta() {
+    this.recetaServicio.eliminarReceta(this.indiceReceta);
+    this.toastCtrl.create({
+      message: 'Receta eliminada!',
+      duration: 2000,
+      position: 'top'
+    }).present();
 
+    this.navCtrl.pop();
   }
 }

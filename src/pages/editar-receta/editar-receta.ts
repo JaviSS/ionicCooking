@@ -41,14 +41,18 @@ export class EditarRecetaPage implements OnInit {
   }
 
   onGuardar() {
-    this.recetaServicio.insertarReceta(new Receta(
+    let recetaModificada: Receta = new Receta(
       this.formularioReceta.value.nombre,
       this.formularioReceta.value.descripcion,
       this.formularioReceta.value.dificultad,
       this.formularioReceta.value.ingredientes.map((nombre) => {
         return {nombre: nombre, cantidad: 1};
-      }),
-    ));
+      }));
+    if (this.modo === 'Nueva')
+      this.recetaServicio.insertarReceta(recetaModificada);
+    else
+      this.recetaServicio.actualizarReceta(this.indiceReceta, recetaModificada);
+
     this.formularioReceta.reset();
     this.navCtrl.popToRoot();
   }
