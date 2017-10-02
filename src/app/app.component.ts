@@ -8,22 +8,34 @@ import {ListaDeRecetasPage} from "../pages/lista-de-recetas/lista-de-recetas";
 import {RegistroPage} from "../pages/registro/registro";
 import {InicioSesionPage} from "../pages/inicio-sesion/inicio-sesion";
 import firebase from 'firebase';
+import {AutenticacionServicio} from "../servicios/Autenticacion";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  pestaniasPage: Page = PestaniasPage;
+  rootPage: any = PestaniasPage;
   listaDeRecetasPage: Page = ListaDeRecetasPage;
   registroPage: Page = RegistroPage;
   iniciarSesionPage: Page = InicioSesionPage;
+  usuarioAutenticado = false;
   @ViewChild('nav') nav: NavController;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-              private menuCtrl: MenuController) {
+              private menuCtrl: MenuController, private autenticacionServicio: AutenticacionServicio) {
     firebase.initializeApp({
       apiKey: "AIzaSyDCy_vI3-Vz57lC44f8FCeLM3IN3jj3JzI",
       authDomain: "libro-recetas-auth.firebaseapp.com",
+    });
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.usuarioAutenticado = true;
+        this.rootPage = PestaniasPage;
+      } else {
+        this.usuarioAutenticado = false;
+        this.rootPage = InicioSesionPage;
+      }
     });
 
     platform.ready().then(() => {
@@ -39,8 +51,9 @@ export class MyApp {
     this.menuCtrl.close();
   }
 
-  onCerrrarSesion() {
-
+  onCerrarSesion() {
+    this.autenticacionServicio.cerrarSesion();
+    this.usuarioAutenticado = false;
   }
 }
 

@@ -6,19 +6,19 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item (click)="onCargar(listaDeRecetasPage)">
+      <button *ngIf="usuarioAutenticado" ion-item (click)="onCargar(rootPage)">
         <ion-icon name="book"></ion-icon>
         Lista de recetas
       </button>
-      <button ion-item (click)="onCargar(registroPage)">
+      <button *ngIf="!usuarioAutenticado" ion-item (click)="onCargar(registroPage)">
         <ion-icon name="person"></ion-icon>
         No tienes cuenta?
       </button>
-      <button ion-item (click)="onCargar(iniciarSesionPage)">
+      <button *ngIf="!usuarioAutenticado" ion-item (click)="onCargar(iniciarSesionPage)">
         <ion-icon name="log-in"></ion-icon>
         Iniciar sesión
       </button>
-      <button ion-item (click)="onCerrarSesion()">
+      <button *ngIf="usuarioAutenticado" ion-item (click)="onCerrarSesion()">
         <ion-icon name="log-out"></ion-icon>
         Cerrar sesión
       </button>
@@ -27,4 +27,4 @@
 
 </ion-menu>
 
-<ion-nav [root]="pestaniasPage" #nav></ion-nav>
+<ion-nav [root]="rootPage" #nav></ion-nav>

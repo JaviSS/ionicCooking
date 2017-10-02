@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {AutenticacionServicio} from "../../servicios/Autenticacion";
 
@@ -17,20 +17,34 @@ import {AutenticacionServicio} from "../../servicios/Autenticacion";
 })
 export class RegistroPage {
 
-  constructor(private autenticacionServicio: AutenticacionServicio, private loadingController:LoadingController) {
+  constructor(private autenticacionServicio: AutenticacionServicio,
+              private loadingController: LoadingController,
+              private alertController: AlertController) {
   }
 
   onRegistrar(formularioRegistro: NgForm) {
-    this.autenticacionServicio.registrar(formularioRegistro.value.email, formularioRegistro.value.password)
-      .then((respuesta) => {
-        console.log(respuesta)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    this.loadingController.create({
-      content:'Creando cuenta...',
+
+    const cargando = this.loadingController.create({
+      content: 'Creando cuenta...',
 
     });
+
+
+    cargando.present();
+
+    this.autenticacionServicio.registrar(formularioRegistro.value.email, formularioRegistro.value.password)
+      .then(() => {
+        cargando.dismiss();
+      })
+      .catch((error) => {
+        cargando.dismiss();
+
+        this.alertController.create({
+          title: 'Error !',
+          message: error.message,
+          buttons: ['Aceptar']
+        }).present();
+      });
+
   }
 }
