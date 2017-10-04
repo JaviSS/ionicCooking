@@ -19,7 +19,7 @@ export class RegistroPage {
 
   constructor(private autenticacionServicio: AutenticacionServicio,
               private loadingController: LoadingController,
-              private alertController: AlertController) {
+              private alertController: AlertController,) {
   }
 
   onRegistrar(formularioRegistro: NgForm) {

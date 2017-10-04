@@ -15,6 +15,7 @@ import {RecetaServicio} from "../servicios/Receta";
 import {RegistroPage} from "../pages/registro/registro";
 import {InicioSesionPage} from "../pages/inicio-sesion/inicio-sesion";
 import {AutenticacionServicio} from "../servicios/Autenticacion";
+import {ListaDeLaCompraOpcionesPage} from "../pages/lista-de-la-compra/lista-de-la-compra-opciones/lista-de-la-compra-opciones";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {AutenticacionServicio} from "../servicios/Autenticacion";
     PestaniasPage,
     RecetaPage,
     RegistroPage,
-    InicioSesionPage
+    InicioSesionPage,
+    ListaDeLaCompraOpcionesPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import {AutenticacionServicio} from "../servicios/Autenticacion";
     PestaniasPage,
     RecetaPage,
     RegistroPage,
-    InicioSesionPage
+    InicioSesionPage,
+    ListaDeLaCompraOpcionesPage
   ],
   providers: [
     StatusBar,

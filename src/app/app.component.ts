@@ -54,6 +54,7 @@ export class MyApp {
   onCerrarSesion() {
     this.autenticacionServicio.cerrarSesion();
     this.usuarioAutenticado = false;
+    this.nav.setRoot(this.iniciarSesionPage);
   }
 }
 

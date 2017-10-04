@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage} from 'ionic-angular';
+import {IonicPage, PopoverController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {IngredienteServicio} from "../../servicios/Ingrediente";
 import {Ingrediente} from "../../modelos/Ingrediente";
+import {ListaDeLaCompraOpcionesPage} from "./lista-de-la-compra-opciones/lista-de-la-compra-opciones";
 
 @IonicPage()
 @Component({
@@ -14,7 +15,7 @@ export class ListaDeLaCompraPage {
 
   listaDeIngredientes: Ingrediente[];
 
-  constructor(private ingredienteServicio: IngredienteServicio) {
+  constructor(private ingredienteServicio: IngredienteServicio, private popOverCtrl: PopoverController) {
   }
 
   ionViewWillEnter(): void {
@@ -36,5 +37,9 @@ export class ListaDeLaCompraPage {
 
   onEditarIngrediente(ingrediente: Ingrediente, formulario: NgForm) {
     formulario.setValue(ingrediente);
+  }
+
+  onMostrarAcciones() {
+    this.popOverCtrl.create(ListaDeLaCompraOpcionesPage).present();
   }
 }
